@@ -5,12 +5,12 @@ const CoinRouter = express.Router({caseSensitive: true});
 
 // INDEX PAGE - view list
 CoinRouter.route('/').get(function (req, res) {
-	Coin.find().sort({price: -1}).exec(function (err, coins){
+	Coin.find().sort({ name: -1, price: 1}).exec(function (err, coins){
 		if(err){
 			console.log(err);
 		}
 		else {
-			res.render('./coins/index', {coins: coins});
+			res.render('./coins/index', {coins: coins, data: 'My data'});
 		}
 	});
 });
@@ -26,7 +26,8 @@ CoinRouter.route('/post').post(function (req, res) {
 	const coin = new Coin(req.body);
 	console.log('New data comes: ', req.body);
 	coin.save()
-		.then(coin => {
+		.then( (coin) => {
+			console.log('RESULT: ', coin);
 			res.redirect('/coins');
 		})
 		.catch(err => {
@@ -35,18 +36,26 @@ CoinRouter.route('/post').post(function (req, res) {
 });
 
 // EDIT ONE ITEM - WEB FORM
+// CoinRouter.route('/edit/:id/open/:age').get(function (req, res) {
 CoinRouter.route('/edit/:id').get(function (req, res) {
 	const id = req.params.id;
+	// const { id, age } = req.params;
 	Coin.findById(id, function (err, coin){
-		res.render('./coins/edit', {coin: coin});
+		if (err) {
+			console.log('no such id' + id);
+			res.render('./coins/no_such_id', { id: id });
+		} else {
+			res.render('./coins/edit', { coin: coin });
+		}
 	});
 });
 
 // EDIT ONE ITEM - data comes
-CoinRouter.route('/update/:id').post(function (req, res) {
+CoinRouter.route('/update/:id').post(function (req, res, nex) {
 	Coin.findById(req.params.id, function(err, coin) {
 		if (!coin)
-			return next(new Error('Could not load Document'));
+			console.log('no such id' + id);
+			// return next(new Error('Could not load Document'));
 		else {
 			// do your updates here
 			coin.name = req.body.name;

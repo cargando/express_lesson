@@ -5,7 +5,7 @@ const CoinRouter = require('./routes/router');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-// const path = require('path');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -32,6 +32,9 @@ app.get('/', function (req, res) { // вызывает отработку кол
 	res.sendFile(path.join(__dirname,'public', 'index.html'));
 });
 
+app.get('*', function(req, res){
+	res.sendFile(path.join(__dirname,'public', '404.html'));
+});
 
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/expressdemo', { useMongoClient: true });

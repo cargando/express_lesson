@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>EJS Engine</title>
+    <title>Edit Coin</title>
     <% include ./inc.ejs %>
 </head>
 <body>
@@ -10,17 +10,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h3>Add Coin</h3>
-            <form method="post" action="/coins/post">
+            <h3>Edit Coin</h3>
+            <form method="post" action="/coins/update/<%= coin._id %>">
                 <div class="form-group">
                     <label for="item">Coin Name</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" value="<%= coin.name %>">
                 </div>
                 <div class="form-group">
                     <label for="item">Coin Price</label>
-                    <input type="text" class="form-control" id="price" name="price">
+                    <input type="text" class="form-control" id="price" name="price" value="<%= coin.price %>">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Coin</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/coins/" class="btn btn-outline-secondary" role="button">Cancel</a>
             </form>
         </div>
     </div>
