@@ -37,6 +37,6 @@ app.get('*', function(req, res){
 });
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/expressdemo', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/expressdemo', { useUnifiedTopology: true, useNewUrlParser: true });
 
 

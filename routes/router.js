@@ -15,7 +15,7 @@ CoinRouter.route('/').get(function (req, res) {
 	});
 });
 
-// ADD ITEM TO DB - FORM view
+// CREATE NEW ITEM TO DB - FORM view
 CoinRouter.route('/create').get(function (req, res) {
 	res.render('./coins/create');
 });
@@ -32,7 +32,7 @@ CoinRouter.route('/post').post(function (req, res) {
 		})
 		.catch(err => {
 			res.status(400).send("Error: Can't save to database " + err.message);
-		}); 
+		});
 });
 
 // EDIT ONE ITEM - WEB FORM
@@ -50,7 +50,7 @@ CoinRouter.route('/edit/:id').get(function (req, res) {
 	});
 });
 
-// EDIT ONE ITEM - data comes
+// SAVE EDITed ITEM - data comes
 CoinRouter.route('/update/:id').post(function (req, res, nex) {
 	Coin.findById(req.params.id, function(err, coin) {
 		if (!coin)
