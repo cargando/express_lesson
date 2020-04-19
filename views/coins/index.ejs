@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Node js Express Tutorial</title>
-    <% include ./inc.ejs %>
+    <%- include('inc.ejs') %>
 </head>
 <body>
-<% include ./navbar.ejs %>
+<%- include('./navbar.ejs') %>
 
 <div class="container">
     <div class="row">
@@ -36,6 +36,6 @@
     <hr />
     <a href="/coins/create" class="btn btn-primary" role="button">Create Currency</a>
 </div>
-<% include ./footer.ejs %>
+<%- include('./footer.ejs') %>
 </body>
 </html>
