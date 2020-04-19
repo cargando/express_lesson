@@ -32,7 +32,7 @@ CoinRouter.route('/post').post(function (req, res) {
 		})
 		.catch(err => {
 			res.status(400).send("Error: Can't save to database " + err.message);
-		});
+		}); 
 });
 
 // EDIT ONE ITEM - WEB FORM
